@@ -245,6 +245,75 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/market',
+    component: Layout,
+    meta: {
+      title: '市场活动',
+      icon: 'market',
+      roles: ['admin', 'editor']
+    },
+    children: [
+      {
+        path: 'addReservation',
+        component: () => import('@/views/drive/addReservation'),
+        name: 'addEmployee',
+        meta: { title: '添加预约信息' }
+      },
+      {
+        path: 'message',
+        component: () => import('@/views/drive/message'),
+        name: 'message',
+        meta: { title: '预约信息' }
+      }
+    ]
+  },
+  {
+    path: '/afterService',
+    component: Layout,
+    meta: {
+      title: '售后服务',
+      icon: 'after',
+      roles: ['admin', 'editor']
+    },
+    children: [
+      {
+        path: 'addReservation',
+        component: () => import('@/views/drive/addReservation'),
+        name: 'addEmployee',
+        meta: { title: '添加预约信息' }
+      },
+      {
+        path: 'message',
+        component: () => import('@/views/drive/message'),
+        name: 'message',
+        meta: { title: '预约信息' }
+      }
+    ]
+  },
+  {
+    path: '/feedback',
+    component: Layout,
+    meta: {
+      title: '用户反馈',
+      icon: 'feedback',
+      roles: ['admin', 'editor']
+    },
+    children: [
+      {
+        path: 'addReservation',
+        component: () => import('@/views/drive/addReservation'),
+        name: 'addEmployee',
+        meta: { title: '添加预约信息' }
+      },
+      {
+        path: 'message',
+        component: () => import('@/views/drive/message'),
+        name: 'message',
+        meta: { title: '预约信息' }
+      }
+    ]
+  },
+  {
     path: '/my',
     component: Layout,
     meta: { roles: ['editor'] },
