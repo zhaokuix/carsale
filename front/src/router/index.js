@@ -255,20 +255,20 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'addReservation',
-        component: () => import('@/views/drive/addReservation'),
-        name: 'addEmployee',
-        meta: { title: '添加预约信息' }
+        component: () => import('@/views/market/addActivity'),
+        name: 'addReservation',
+        meta: { title: '添加活动计划' }
       },
       {
         path: 'message',
         component: () => import('@/views/drive/message'),
         name: 'message',
-        meta: { title: '预约信息' }
+        meta: { title: '查看活动计划' }
       }
     ]
   },
   {
-    path: '/afterService',
+    path: '/service',
     component: Layout,
     meta: {
       title: '售后服务',
@@ -277,16 +277,16 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'addReservation',
-        component: () => import('@/views/drive/addReservation'),
-        name: 'addEmployee',
-        meta: { title: '添加预约信息' }
+        path: 'addService',
+        component: () => import('@/views/afterService/addService'),
+        name: 'addService',
+        meta: { title: '服务登记' }
       },
       {
         path: 'message',
         component: () => import('@/views/drive/message'),
         name: 'message',
-        meta: { title: '预约信息' }
+        meta: { title: '服务查看' }
       }
     ]
   },
