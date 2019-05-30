@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-header>
-      <h3 style="font-family: Microsoft YaHei">服务登记</h3>
+      <h3 style="font-family: Microsoft YaHei">添加反馈信息</h3>
       <hr style="border: 0.5px solid #dcdfe6">
     </el-header>
     <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm" style="width: 500px; margin-left:50px;">
@@ -11,11 +11,11 @@
       <el-form-item label="联系电话" prop="phone">
         <el-input v-model="ruleForm.phone"/>
       </el-form-item>
-      <el-form-item label="服务时间" prop="serviceDate">
-        <el-date-picker v-model="ruleForm.serviceDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期" style="width: 100%;"/>
+      <el-form-item label="反馈时间" prop="feedbackDate">
+        <el-date-picker v-model="ruleForm.feedbackDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期" style="width: 100%;"/>
       </el-form-item>
-      <el-form-item label="服务内容" prop="service">
-        <el-input v-model="ruleForm.service" :autosize="{ minRows: 2, maxRows: 10}" type="textarea" placeholder="输入服务内容" />
+      <el-form-item label="反馈内容" prop="feedback">
+        <el-input v-model="ruleForm.feedback" :autosize="{ minRows: 2, maxRows: 10}" type="textarea" placeholder="输入反馈内容" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
@@ -27,7 +27,7 @@
 
 <script>
 // import { validateIdCard } from '@/utils/validate'
-import { addService } from '@/api/service'
+import { addFeedback } from '@/api/feedback'
 
 export default {
   data() {
@@ -35,8 +35,8 @@ export default {
       ruleForm: {
         name: '',
         phone: '',
-        serviceDate: undefined,
-        service: ''
+        feedbackDate: undefined,
+        feedback: ''
       },
       rules: {
         name: [
@@ -45,11 +45,11 @@ export default {
         phone: [
           { required: true, message: '请输入客户联系电话', trigger: 'blur' }
         ],
-        serviceDate: [
-          { required: true, message: '请选择服务时间', trigger: 'change' }
+        feedbackDate: [
+          { required: true, message: '请输入反馈时间', trigger: 'blur' }
         ],
-        service: [
-          { required: true, message: '请输入服务内容', trigger: 'blur' }
+        feedback: [
+          { required: true, message: '请输入反馈内容', trigger: 'blur' }
         ]
       }
     }
@@ -58,7 +58,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          addService(this.ruleForm).then(response => {
+          addFeedback(this.ruleForm).then(response => {
             if (response.data.code === 20000) {
               this.$notify({
                 title: '成功',

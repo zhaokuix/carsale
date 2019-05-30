@@ -5,6 +5,7 @@ import com.gxyan.vo.EmpChart;
 import com.gxyan.vo.OrderQuery;
 import com.gxyan.vo.OrderList;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.Date;

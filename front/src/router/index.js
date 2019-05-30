@@ -300,16 +300,16 @@ export const asyncRouterMap = [
     },
     children: [
       {
-        path: 'addReservation',
-        component: () => import('@/views/drive/addReservation'),
-        name: 'addEmployee',
-        meta: { title: '添加预约信息' }
+        path: 'addFeedback',
+        component: () => import('@/views/feedback/addFeedback'),
+        name: 'addFeedback',
+        meta: { title: '添加反馈信息' }
       },
       {
         path: 'message',
         component: () => import('@/views/drive/message'),
         name: 'message',
-        meta: { title: '预约信息' }
+        meta: { title: '反馈信息' }
       }
     ]
   },

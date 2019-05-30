@@ -3,8 +3,10 @@ package com.gxyan.dao;
 import com.gxyan.pojo.OrderDetails;
 import com.gxyan.vo.*;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 
 public interface OrderDetailsMapper {
     int deleteByPrimaryKey(String id);
