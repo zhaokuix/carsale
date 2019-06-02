@@ -4,7 +4,7 @@ export function addReservation(reservation) {
   console.log(reservation)
   return request({
     url: '/drive/addReservation',
-    method: 'post',
+    method: 'get',
     params: reservation
   })
 }

@@ -52,7 +52,7 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
-    <el-dialog :visible.sync="dialogFormVisible" title="修改客户信息">
+    <el-dialog :visible.sync="dialogFormVisible" title="修改预约信息">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="temp.name"/>
