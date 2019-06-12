@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function addService(activity) {
-  console.log(activity)
+export function addService(service) {
+  console.log(service)
   return request({
     url: '/service/addService',
-    method: 'post',
-    params: activity
+    method: 'get',
+    params: service
   })
 }

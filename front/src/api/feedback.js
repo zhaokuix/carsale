@@ -4,7 +4,7 @@ export function addFeedback(activity) {
   console.log(activity)
   return request({
     url: '/feedback/addFeedback',
-    method: 'post',
+    method: 'get',
     params: activity
   })
 }

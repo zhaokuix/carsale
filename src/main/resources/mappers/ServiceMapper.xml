@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gxyan.dao.ReservationMapper">
-  <resultMap id="BaseResultMap" type="com.gxyan.pojo.Reservation">
+<mapper namespace="com.gxyan.dao.ServiceMapper">
+  <resultMap id="BaseResultMap" type="com.gxyan.pojo.Service">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="id_card" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="reservation_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="service_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="service" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, phone, id_card, gender, reservation_date
+    id, name, phone, service_date, service
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from reservation
+    from service
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from reservation
+    delete from service
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.gxyan.pojo.Reservation">
-    insert into reservation (id, name, phone, 
-      id_card, gender, reservation_date
-      )
+  <insert id="insert" parameterType="com.gxyan.pojo.Service">
+    insert into service (id, name, phone, 
+      service_date, service)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{idCard,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{reservationDate,jdbcType=DATE}
-      )
+      #{serviceDate,jdbcType=DATE}, #{service,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.gxyan.pojo.Reservation">
-    insert into reservation
+  <insert id="insertSelective" parameterType="com.gxyan.pojo.Service">
+    insert into service
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -44,14 +41,11 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="idCard != null">
-        id_card,
+      <if test="serviceDate != null">
+        service_date,
       </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="reservationDate != null">
-        reservation_date,
+      <if test="service != null">
+        service,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -64,19 +58,16 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="idCard != null">
-        #{idCard,jdbcType=VARCHAR},
+      <if test="serviceDate != null">
+        #{serviceDate,jdbcType=DATE},
       </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="reservationDate != null">
-        #{reservationDate,jdbcType=DATE},
+      <if test="service != null">
+        #{service,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gxyan.pojo.Reservation">
-    update reservation
+  <update id="updateByPrimaryKeySelective" parameterType="com.gxyan.pojo.Service">
+    update service
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -84,25 +75,21 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="idCard != null">
-        id_card = #{idCard,jdbcType=VARCHAR},
+      <if test="serviceDate != null">
+        service_date = #{serviceDate,jdbcType=DATE},
       </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="reservationDate != null">
-        reservation_date = #{reservationDate,jdbcType=DATE},
+      <if test="service != null">
+        service = #{service,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gxyan.pojo.Reservation">
-    update reservation
+  <update id="updateByPrimaryKey" parameterType="com.gxyan.pojo.Service">
+    update service
     set name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      id_card = #{idCard,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      reservation_date = #{reservationDate,jdbcType=DATE}
+      service_date = #{serviceDate,jdbcType=DATE},
+      service = #{service,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

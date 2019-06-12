@@ -29,7 +29,7 @@ public class ReservationServiceImpl implements IReservationService {
     @Override
     public ServerResponse addReservation(Reservation reservation) {
         reservation.setId(createReservationId());
-        int resultCount = reservationMapper.insert(reservation);
+        int resultCount = reservationMapper.insertSelective(reservation);
         if (resultCount != 0) {
             return ServerResponse.createBySuccess();
         }

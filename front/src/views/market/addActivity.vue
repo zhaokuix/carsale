@@ -14,8 +14,8 @@
       <el-form-item label="活动时间" prop="activityDate">
         <el-date-picker v-model="ruleForm.activityDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期" style="width: 100%;"/>
       </el-form-item>
-      <el-form-item label="活动内容" prop="activity">
-        <el-input v-model="ruleForm.activity" :autosize="{ minRows: 2, maxRows: 10}" type="textarea" placeholder="输入活动内容" />
+      <el-form-item label="活动内容" prop="detail">
+        <el-input v-model="ruleForm.detail" :autosize="{ minRows: 2, maxRows: 10}" type="textarea" placeholder="输入活动内容" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
@@ -36,7 +36,7 @@ export default {
         name: '',
         phone: '',
         activityDate: undefined,
-        activity: ''
+        detail: ''
       },
       rules: {
         name: [
@@ -48,7 +48,7 @@ export default {
         activityDate: [
           { required: true, message: '请选择活动时间', trigger: 'change' }
         ],
-        activity: [
+        detail: [
           { required: true, message: '请输入活动内容', trigger: 'blur' }
         ]
       }

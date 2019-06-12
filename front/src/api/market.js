@@ -4,7 +4,7 @@ export function addActivity(activity) {
   console.log(activity)
   return request({
     url: '/market/addActivity',
-    method: 'post',
+    method: 'get',
     params: activity
   })
 }
