@@ -1,15 +1,19 @@
 package com.gxyan.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.gxyan.common.ServerResponse;
 import com.gxyan.dao.ServiceMapper;
 import com.gxyan.pojo.Service;
 import com.gxyan.service.IAfterService;
+import com.gxyan.vo.ListVo;
+import com.gxyan.vo.ServiceQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @org.springframework.stereotype.Service
@@ -27,6 +31,27 @@ public class AfterServiceImpl implements IAfterService {
         return ServerResponse.createByErrorMessage("添加失败");
     }
 
+    @Override
+    public ServerResponse getList(ServiceQuery serviceQuery) {
+        List<Service> list = PageHelper.startPage(serviceQuery.getPage(), serviceQuery.getLimit()).doSelectPage(()-> serviceMapper.selectSelective(serviceQuery));
+        if (list != null) {
+            ListVo listVo = new ListVo();
+            listVo.setItems(list);
+            listVo.setTotal(PageHelper.count(()->serviceMapper.selectSelective(serviceQuery)));
+            return ServerResponse.createBySuccess(listVo);
+        }
+        return ServerResponse.createByErrorMessage("获取售后服务列表失败");
+    }
+
+    @Override
+    public ServerResponse updateService(Service service) {
+        int resultCount = serviceMapper.updateByPrimaryKeySelective(service);
+        if (resultCount != 0) {
+            return ServerResponse.createBySuccess();
+        }
+        log.error(service.toString());
+        return ServerResponse.createByErrorMessage("更新失败");
+    }
 
     /**
      * 客户编号

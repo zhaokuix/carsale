@@ -12,17 +12,17 @@ export function addFeedback(activity) {
 export function fetchList(query) {
   console.log(query)
   return request({
-    url: '/drive/getList',
+    url: '/feedback/getList',
     method: 'get',
     params: query
   })
 }
 
-export function updateReservation(employee) {
-  console.log(employee)
+export function updateFeedback(feedback) {
+  console.log(feedback)
   return request({
-    url: '/drive/update',
+    url: '/feedback/update',
     method: 'post',
-    params: employee
+    params: feedback
   })
 }

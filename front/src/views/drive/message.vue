@@ -38,7 +38,7 @@
           <span>{{ scope.row.idCard }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="预约时间" prop="createTime" sortable="custom" min-width="135px" align="center">
+      <el-table-column label="预约时间" prop="reservationDate" sortable="reservation" min-width="135px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.reservationDate | parseTime('{y}-{m}-{d}') }}</span>
         </template>

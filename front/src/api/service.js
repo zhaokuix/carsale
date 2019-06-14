@@ -12,17 +12,17 @@ export function addService(service) {
 export function fetchList(query) {
   console.log(query)
   return request({
-    url: '/drive/getList',
+    url: '/service/getList',
     method: 'get',
     params: query
   })
 }
 
-export function updateReservation(employee) {
-  console.log(employee)
+export function updateService(service) {
+  console.log(service)
   return request({
-    url: '/drive/update',
+    url: '/service/update',
     method: 'post',
-    params: employee
+    params: service
   })
 }

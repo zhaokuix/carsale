@@ -1,10 +1,9 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.id" placeholder="预约编号" clearable style="width: 160px;" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-input v-model="listQuery.id" placeholder="反馈编号" clearable style="width: 160px;" class="filter-item" @keyup.enter.native="handleFilter"/>
       <el-input v-model="listQuery.name" placeholder="客户姓名" clearable style="width: 150px;" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <el-input v-model="listQuery.phone" placeholder="手机号" clearable style="width: 150px;" class="filter-item" @keyup.enter.native="handleFilter"/>
-      <el-input v-model="listQuery.idCard" placeholder="身份证号" clearable style="width: 190px;" class="filter-item" @keyup.enter.native="handleFilter"/>
+      <el-input v-model="listQuery.phone" placeholder="联系电话" clearable style="width: 150px;" class="filter-item" @keyup.enter.native="handleFilter"/>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>
     </div>
@@ -18,12 +17,12 @@
       highlight-current-row
       style="width: 100%;"
       @sort-change="sortChange">
-      <el-table-column label="预约编号" prop="id" sortable="reservation" align="center" min-width="105px">
+      <el-table-column label="反馈编号" prop="id" sortable="reservation" align="center" min-width="105px">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="姓名" prop="name" width="80px" align="center">
+      <el-table-column label="客户姓名" prop="name" width="115px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.name }}</span>
         </template>
@@ -33,14 +32,9 @@
           <span>{{ scope.row.phone }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="身份证号" prop="idCard" align="center" min-width="150px">
+      <el-table-column label="反馈时间" prop="feedbackDate" sortable="custom" min-width="115px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.idCard }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="预约时间" prop="createTime" sortable="custom" min-width="135px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.reservationDate | parseTime('{y}-{m}-{d}') }}</span>
+          <span>{{ scope.row.feedbackDate | parseTime('{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" min-width="100px" class-name="small-padding fixed-width">
@@ -52,19 +46,19 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
-    <el-dialog :visible.sync="dialogFormVisible" title="修改预约信息">
+    <el-dialog :visible.sync="dialogFormVisible" title="修改反馈信息">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="姓名" prop="name">
+        <el-form-item label="客户姓名" prop="name">
           <el-input v-model="temp.name"/>
         </el-form-item>
         <el-form-item label="联系电话" prop="phone">
           <el-input v-model="temp.phone"/>
         </el-form-item>
-        <el-form-item label="身份证号" prop="idCard">
-          <el-input v-model="temp.idCard"/>
+        <el-form-item label="反馈日期" prop="feedbackDate">
+          <el-date-picker v-model="temp.feedbackDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期" style="width: 100%;"/>
         </el-form-item>
-        <el-form-item label="预约日期" prop="reservationDate">
-          <el-date-picker v-model="temp.reservationDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期" style="width: 100%;"/>
+        <el-form-item label="反馈内容" prop="feedback">
+          <el-input v-model="temp.feedback" :autosize="{ minRows: 2, maxRows: 10}" type="textarea" placeholder="输入活动内容" />
         </el-form-item>
         <el-form-item>
           <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -77,11 +71,10 @@
 </template>
 
 <script>
-import { fetchList, updateReservation } from '@/api/drive'
+import { fetchList, updateFeedback } from '@/api/feedback'
 import waves from '@/directive/waves' // Waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
-import { validateIdCard } from '@/utils/validate'
 
 export default {
   name: 'ComplexTable',
@@ -99,15 +92,14 @@ export default {
         id: undefined,
         name: null,
         phone: undefined,
-        idCard: undefined,
-        reservationDate: undefined,
+        feedbackDate: undefined,
         orderBy: null
       },
       temp: {
         name: '',
         phone: '',
-        idCard: '',
-        reservationDate: undefined
+        feedbackDate: undefined,
+        feedback: ''
       },
       dialogFormVisible: false,
       rules: {
@@ -115,13 +107,13 @@ export default {
           { required: true, message: '请输入客户姓名', trigger: 'blur' }
         ],
         phone: [
-          { required: true, message: '请输入客户联系电话', trigger: 'blur' }
+          { required: true, message: '请输入客户电话', trigger: 'blur' }
         ],
-        idCard: [
-          { required: true, validator: validateIdCard, trigger: 'blur' }
+        feedbackDate: [
+          { required: true, message: '请输入反馈日期', trigger: 'blur' }
         ],
-        reservationDate: [
-          { required: true, message: '请输入预约日期', trigger: 'blur' }
+        feedback: [
+          { required: true, message: '请输入反馈内容', trigger: 'blur' }
         ]
       },
       downloadLoading: false
@@ -183,7 +175,7 @@ export default {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
           tempData.createTime = null
-          updateReservation(tempData).then(response => {
+          updateFeedback(tempData).then(response => {
             if (response.data.code === 20000) {
               for (const v of this.list) {
                 if (v.id === this.temp.id) {
@@ -227,7 +219,7 @@ export default {
     },
     formatJson(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => {
-        if (j === 'reservationDate') {
+        if (j === 'feedbackDate') {
           return parseTime(v[j])
         } else {
           return v[j]
