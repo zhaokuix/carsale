@@ -1,6 +1,9 @@
 package com.gxyan.dao;
 
 import com.gxyan.pojo.Market;
+import com.gxyan.vo.MarketQuery;
+
+import java.util.List;
 
 public interface MarketMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface MarketMapper {
     int updateByPrimaryKeySelective(Market record);
 
     int updateByPrimaryKey(Market record);
+
+    List<Market> selectSelective(MarketQuery marketQuery);
 }

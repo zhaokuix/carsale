@@ -1,6 +1,9 @@
 package com.gxyan.dao;
 
 import com.gxyan.pojo.Reservation;
+import com.gxyan.vo.ReservationQuery;
+
+import java.util.List;
 
 public interface ReservationMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface ReservationMapper {
     int updateByPrimaryKeySelective(Reservation record);
 
     int updateByPrimaryKey(Reservation record);
+
+    List<Reservation> selectSelective(ReservationQuery reservationQuery);
 }

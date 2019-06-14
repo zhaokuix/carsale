@@ -5,6 +5,7 @@ import com.gxyan.pojo.Reservation;
 import com.gxyan.service.ICustomerService;
 import com.gxyan.service.IReservationService;
 import com.gxyan.vo.CustomerQuery;
+import com.gxyan.vo.ReservationQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,14 +28,13 @@ public class ReservationController {
     public ServerResponse addReservation(Reservation reservation) {
         return reservationService.addReservation(reservation);
     }
+    @RequestMapping(value = "getList", method = RequestMethod.GET)
+    public ServerResponse getList(ReservationQuery reservationQuery) {
+        return reservationService.getList(reservationQuery);
+    }
 
-//    @RequestMapping(value = "getList", method = RequestMethod.GET)
-//    public ServerResponse getList(CustomerQuery customerQuery) {
-//        return customerService.getList(customerQuery);
-//    }
-//
-//    @RequestMapping(value = "update", method = RequestMethod.POST)
-//    public ServerResponse update(Customer customer) {
-//        return customerService.updateCustomer(customer);
-//    }
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public ServerResponse update(Reservation reservation) {
+        return reservationService.updateReservation(reservation);
+    }
 }

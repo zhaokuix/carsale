@@ -1,9 +1,12 @@
 package com.gxyan.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.gxyan.common.ServerResponse;
 import com.gxyan.dao.MarketMapper;
 import com.gxyan.pojo.Market;
 import com.gxyan.service.IMarketService;
+import com.gxyan.vo.ListVo;
+import com.gxyan.vo.MarketQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -26,6 +30,28 @@ public class MarketServiceImpl implements IMarketService {
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByErrorMessage("添加失败");
+    }
+
+    @Override
+    public ServerResponse getList(MarketQuery marketQuery) {
+        List<Market> list = PageHelper.startPage(marketQuery.getPage(), marketQuery.getLimit()).doSelectPage(()-> marketMapper.selectSelective(marketQuery));
+        if (list != null) {
+            ListVo listVo = new ListVo();
+            listVo.setItems(list);
+            listVo.setTotal(PageHelper.count(()->marketMapper.selectSelective(marketQuery)));
+            return ServerResponse.createBySuccess(listVo);
+        }
+        return ServerResponse.createByErrorMessage("获取市场活动列表失败");
+    }
+
+    @Override
+    public ServerResponse updateMarket(Market market) {
+        int resultCount = marketMapper.updateByPrimaryKeySelective(market);
+        if (resultCount != 0) {
+            return ServerResponse.createBySuccess();
+        }
+        log.error(market.toString());
+        return ServerResponse.createByErrorMessage("更新失败");
     }
 
 

@@ -19,6 +19,31 @@
     from market
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectSelective" parameterType="com.gxyan.vo.MarketQuery" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market
+    <where>
+      <choose>
+        <when test="id != null and id != ''">
+          id = #{id}
+        </when>
+        <when test="phone != null and phone != ''">
+          phone = #{phone}
+        </when>
+        <when test="activityDate != null and activityDate != ''">
+          activity_date = #{activityDate}
+        </when>
+        <when test="name != null and name != ''">
+          <bind name="pattern" value="'%' + name + '%'" />
+          name like #{pattern}
+        </when>
+      </choose>
+    </where>
+    <if test="orderBy != null and orderBy != ''">
+      order by ${orderBy}
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from market
     where id = #{id,jdbcType=BIGINT}

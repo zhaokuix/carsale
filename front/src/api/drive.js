@@ -8,22 +8,22 @@ export function addReservation(reservation) {
     params: reservation
   })
 }
-/*
+
 export function fetchList(query) {
   console.log(query)
   return request({
-    url: '/employee/getList',
+    url: '/drive/getList',
     method: 'get',
     params: query
   })
 }
 
-export function updateEmployee(employee) {
-  console.log(employee)
+export function updateReservation(reservation) {
+  console.log(reservation)
   return request({
-    url: '/employee/update',
+    url: '/drive/update',
     method: 'post',
-    params: employee
+    params: reservation
   })
 }
-*/
+

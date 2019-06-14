@@ -261,7 +261,7 @@ export const asyncRouterMap = [
       },
       {
         path: 'message',
-        component: () => import('@/views/drive/message'),
+        component: () => import('@/views/market/message'),
         name: 'message',
         meta: { title: '查看活动计划' }
       }
@@ -284,7 +284,7 @@ export const asyncRouterMap = [
       },
       {
         path: 'message',
-        component: () => import('@/views/drive/message'),
+        component: () => import('@/views/afterService/message'),
         name: 'message',
         meta: { title: '服务查看' }
       }
@@ -307,7 +307,7 @@ export const asyncRouterMap = [
       },
       {
         path: 'message',
-        component: () => import('@/views/drive/message'),
+        component: () => import('@/views/feedback/message'),
         name: 'message',
         meta: { title: '反馈信息' }
       }

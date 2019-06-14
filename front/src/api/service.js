@@ -8,3 +8,21 @@ export function addService(service) {
     params: service
   })
 }
+
+export function fetchList(query) {
+  console.log(query)
+  return request({
+    url: '/drive/getList',
+    method: 'get',
+    params: query
+  })
+}
+
+export function updateReservation(employee) {
+  console.log(employee)
+  return request({
+    url: '/drive/update',
+    method: 'post',
+    params: employee
+  })
+}
