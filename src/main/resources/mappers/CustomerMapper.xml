@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gxyan.dao.CustomerMapper">
-  <resultMap id="BaseResultMap" type="com.gxyan.pojo.Customer">
+<mapper namespace="com.zhaokuix.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.zhaokuix.pojo.Customer">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -19,7 +19,7 @@
     from customer
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.gxyan.vo.CustomerQuery">
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.zhaokuix.vo.CustomerQuery">
     select
     <include refid="Base_Column_List"/>
     from customer
@@ -54,13 +54,13 @@
     delete from customer
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.gxyan.pojo.Customer">
+  <insert id="insert" parameterType="com.zhaokuix.pojo.Customer">
     insert into customer (id, name, phone, 
       id_card, create_time)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.gxyan.pojo.Customer">
+  <insert id="insertSelective" parameterType="com.zhaokuix.pojo.Customer">
     insert into customer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -91,7 +91,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gxyan.pojo.Customer">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaokuix.pojo.Customer">
     update customer
     <set>
       <if test="name != null">
@@ -106,7 +106,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gxyan.pojo.Customer">
+  <update id="updateByPrimaryKey" parameterType="com.zhaokuix.pojo.Customer">
     update customer
     set name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},

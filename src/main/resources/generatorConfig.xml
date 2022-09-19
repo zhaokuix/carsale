@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!--导入属性配置-->
-    <properties resource="application.properties"/>
+    <properties resource="application.yml"/>
 
     <!--指定特定数据库的jdbc驱动jar包的位置-->
     <!--<classPathEntry location="${db.driverLocation}"/>-->
@@ -20,10 +20,10 @@
 
         <!--jdbc的数据库连接 -->
         <jdbcConnection
-                driverClass="${spring.datasource.driver-class-name}"
-                connectionURL="${spring.datasource.url}"
-                userId="${spring.datasource.username}"
-                password="${spring.datasource.password}">
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://localhost:3306/carsale"
+                userId="root"
+                password="123456">
         </jdbcConnection>
 
 
@@ -37,8 +37,8 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径
         -->
-        <!--<javaModelGenerator targetPackage="com.gxyan.pojo" targetProject=".\src\main\java">-->
-        <javaModelGenerator targetPackage="com.gxyan.pojo" targetProject="./src/main/java">
+        <!--<javaModelGenerator targetPackage="com.zhaokuix.pojo" targetProject=".\src\main\java">-->
+        <javaModelGenerator targetPackage="com.zhaokuix.pojo" targetProject="./src/main/java">
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
              <!--是否对model添加 构造函数 -->
@@ -62,8 +62,8 @@
         -->
 
         <!-- targetPackage：mapper接口dao生成的位置 -->
-        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.gxyan.dao" targetProject=".\src\main\java">-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.gxyan.dao" targetProject="./src/main/java">
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.zhaokuix.dao" targetProject=".\src\main\java">-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zhaokuix.dao" targetProject="./src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>

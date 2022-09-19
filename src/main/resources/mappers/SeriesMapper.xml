@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gxyan.dao.SeriesMapper">
-  <resultMap id="BaseResultMap" type="com.gxyan.pojo.Series">
+<mapper namespace="com.zhaokuix.dao.SeriesMapper">
+  <resultMap id="BaseResultMap" type="com.zhaokuix.pojo.Series">
     <constructor>
       <idArg column="series_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="brand_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -34,13 +34,13 @@
     delete from series
     where series_id = #{seriesId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.gxyan.pojo.Series">
+  <insert id="insert" parameterType="com.zhaokuix.pojo.Series">
     insert into series (series_id, brand_id, series_name, 
       status)
     values (#{seriesId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{seriesName,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.gxyan.pojo.Series">
+  <insert id="insertSelective" parameterType="com.zhaokuix.pojo.Series">
     insert into series
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="seriesId != null">
@@ -71,7 +71,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gxyan.pojo.Series">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaokuix.pojo.Series">
     update series
     <set>
       <if test="brandId != null">
@@ -86,7 +86,7 @@
     </set>
     where series_id = #{seriesId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gxyan.pojo.Series">
+  <update id="updateByPrimaryKey" parameterType="com.zhaokuix.pojo.Series">
     update series
     set brand_id = #{brandId,jdbcType=INTEGER},
       series_name = #{seriesName,jdbcType=VARCHAR},

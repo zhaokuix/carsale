@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gxyan.dao.EmployeeMapper">
-  <resultMap id="BaseResultMap" type="com.gxyan.pojo.Employee">
+<mapper namespace="com.zhaokuix.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.zhaokuix.pojo.Employee">
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="role" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -36,7 +36,7 @@
     where id = #{id}
     and password = #{password}
   </select>
-  <select id="selectSelective" resultType="com.gxyan.pojo.Employee" parameterType="com.gxyan.vo.EmployeeQuery">
+  <select id="selectSelective" resultType="com.zhaokuix.pojo.Employee" parameterType="com.zhaokuix.vo.EmployeeQuery">
     select
     id, role, name, id_card idCard, phone, gender, salary, entry_time entryTime, status
     from employee
@@ -72,7 +72,7 @@
     delete from employee
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.gxyan.pojo.Employee">
+  <insert id="insert" parameterType="com.zhaokuix.pojo.Employee">
     insert into employee (id, role, name, 
       password, id_card, phone, 
       gender, salary, entry_time, 
@@ -82,7 +82,7 @@
       #{gender,jdbcType=VARCHAR}, #{salary,jdbcType=DECIMAL}, #{entryTime,jdbcType=DATE},
       #{status,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.gxyan.pojo.Employee">
+  <insert id="insertSelective" parameterType="com.zhaokuix.pojo.Employee">
     insert into employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gxyan.pojo.Employee">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaokuix.pojo.Employee">
     update employee
     <set>
       <if test="role != null">
@@ -182,7 +182,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gxyan.pojo.Employee">
+  <update id="updateByPrimaryKey" parameterType="com.zhaokuix.pojo.Employee">
     update employee
     set role = #{role,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

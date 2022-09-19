@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gxyan.dao.OrderDetailsMapper">
-  <resultMap id="BaseResultMap" type="com.gxyan.pojo.OrderDetails">
+<mapper namespace="com.zhaokuix.dao.OrderDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.zhaokuix.pojo.OrderDetails">
     <constructor>
       <idArg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="order_id" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -18,13 +18,13 @@
     from order_details
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectByOrderId" resultType="com.gxyan.pojo.OrderDetails">
+  <select id="selectByOrderId" resultType="com.zhaokuix.pojo.OrderDetails">
     select order_details.id, order_id orderId, car_id carId, car_number carNumber
     from order_details
     inner join `order` o on order_details.order_id = o.id
     where order_id = #{orderId}
   </select>
-  <select id="selectDetailsByOrderId" resultType="com.gxyan.vo.Details">
+  <select id="selectDetailsByOrderId" resultType="com.zhaokuix.vo.Details">
     select order_details.id, c.id carId, type, color, sale_price salePrice,
                              b.brand_id brandId, b.brand_name brandName,
                              s.series_id seriesId, s.series_name seriesName,
@@ -35,7 +35,7 @@
       inner join brand b on s.brand_id = b.brand_id
     where order_id = #{orderId}
   </select>
-  <select id="selectSelective" resultType="com.gxyan.vo.DetailsList" parameterType="com.gxyan.vo.DetailsQuery">
+  <select id="selectSelective" resultType="com.zhaokuix.vo.DetailsList" parameterType="com.zhaokuix.vo.DetailsQuery">
     select order_details.id, order_details.order_id orderId,
       car_id carId, customer_id customerId,
       e.name employeeName, car_number carNumber,
@@ -78,7 +78,7 @@
     where TO_DAYS( NOW( ) ) - TO_DAYS(pay_time) < 2 and TO_DAYS( NOW( ) ) - TO_DAYS(pay_time) >= 1
     ]]>
   </select>
-  <select id="selectSalesChart" resultType="com.gxyan.vo.SalesChart">
+  <select id="selectSalesChart" resultType="com.zhaokuix.vo.SalesChart">
     -- 利润
     SELECT e.date, income, expenditure, income-expenditure profit FROM base_month b
       INNER JOIN (
@@ -105,13 +105,13 @@
       ) e ON e.date = b.date
     GROUP BY e.date
   </select>
-  <select id="selectIndexSales" resultType="com.gxyan.vo.IndexSales" parameterType="int">
+  <select id="selectIndexSales" resultType="com.zhaokuix.vo.IndexSales" parameterType="int">
     SELECT SUM(total_price) sales,SUM(car_number) saleNum FROM `order`
       INNER JOIN order_details ON order_id = `order`.id
     WHERE DATE_FORMAT(pay_time,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
           AND employee_id = #{id}
   </select>
-  <select id="selectEmpChart" resultType="com.gxyan.vo.EmpChart">
+  <select id="selectEmpChart" resultType="com.zhaokuix.vo.EmpChart">
     SELECT CONCAT_WS('/',brand.brand_name,series.series_name) name, SUM(num*sale_price) value FROM car
       INNER JOIN (
                    SELECT car_id,SUM(car_number) num FROM order_details
@@ -128,13 +128,13 @@
     delete from order_details
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.gxyan.pojo.OrderDetails">
+  <insert id="insert" parameterType="com.zhaokuix.pojo.OrderDetails">
     insert into order_details (id, order_id, car_id, 
       car_number)
     values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT},
       #{carNumber,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.gxyan.pojo.OrderDetails">
+  <insert id="insertSelective" parameterType="com.zhaokuix.pojo.OrderDetails">
     insert into order_details
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gxyan.pojo.OrderDetails">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaokuix.pojo.OrderDetails">
     update order_details
     <set>
       <if test="orderId != null">
@@ -180,7 +180,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gxyan.pojo.OrderDetails">
+  <update id="updateByPrimaryKey" parameterType="com.zhaokuix.pojo.OrderDetails">
     update order_details
     set order_id = #{orderId,jdbcType=BIGINT},
       car_id = #{carId,jdbcType=BIGINT},

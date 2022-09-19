@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gxyan.dao.CarMapper">
-  <resultMap id="BaseResultMap" type="com.gxyan.pojo.Car">
+<mapper namespace="com.zhaokuix.dao.CarMapper">
+  <resultMap id="BaseResultMap" type="com.zhaokuix.pojo.Car">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="series_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -23,7 +23,7 @@
     from car
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectSelective" parameterType="com.gxyan.vo.StoreQuery" resultType="com.gxyan.vo.StoreList">
+  <select id="selectSelective" parameterType="com.zhaokuix.vo.StoreQuery" resultType="com.zhaokuix.vo.StoreList">
     select
     id, brand_name brandName, series_name seriesName,
     car.series_id seriesId, series.brand_id brandId,
@@ -54,7 +54,7 @@
       order by ${orderBy}
     </if>
   </select>
-  <select id="selectBySeriesId" resultType="com.gxyan.pojo.Car" parameterType="int">
+  <select id="selectBySeriesId" resultType="com.zhaokuix.pojo.Car" parameterType="int">
     select
     id, type, color, sale_price salePrice
     from car
@@ -74,7 +74,7 @@
     delete from car
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.gxyan.pojo.Car">
+  <insert id="insert" parameterType="com.zhaokuix.pojo.Car">
     insert into car (id, series_id, type, 
       color, price, sale_price, 
       repertory, create_time, status
@@ -84,7 +84,7 @@
       #{repertory,jdbcType=INTEGER}, now(), #{status,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.gxyan.pojo.Car">
+  <insert id="insertSelective" parameterType="com.zhaokuix.pojo.Car">
     insert into car
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -145,7 +145,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gxyan.pojo.Car">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhaokuix.pojo.Car">
     update car
     <set>
       <if test="seriesId != null">
@@ -175,7 +175,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gxyan.pojo.Car">
+  <update id="updateByPrimaryKey" parameterType="com.zhaokuix.pojo.Car">
     update car
     set series_id = #{seriesId,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
