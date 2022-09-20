@@ -1,6 +1,6 @@
 ### 项目简介
 
-本项目以[carsale](https://github.com/Hitout/carsale)为基础开发
+本项目以Hitout/carsale为基础开发
 
 本项目基于spring boot以及Vue开发，前端实现基于[PanJiaChen](https://github.com/PanJiaChen)所提供的开源后台项目[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)改造。
 
